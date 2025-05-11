@@ -34,3 +34,7 @@ jobs:
       - name: Docker build 
         run : DOCKER_BUILDKIT=1 docker build -t platform-app --file ./app/Dockerfile.multistage ./app 
 
+
+## TODO 
+# setup docker image scan 
+
