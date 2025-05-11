@@ -7,7 +7,6 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-
     message = "Flask app running on Kubernetes =)!"
     return f"<h1>{message}</h1>"
 

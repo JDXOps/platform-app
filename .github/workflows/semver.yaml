@@ -1,0 +1,20 @@
+---
+name: Semantic Version source code
+run-name: PR merged by ${{ github.actor }}.  (SemVer) 🚀
+on:
+  push: 
+   branches: 
+   - main 
+
+jobs: 
+  generate-semver-tag: 
+    name: Build Docker Image
+    runs-on: ubuntu-latest 
+    steps: 
+      - name: Checkout Code
+        uses: actions/checkout@v
+  
+      - name: Run Semantic Release
+        uses: cycjimmy/semantic-release-action@v3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
