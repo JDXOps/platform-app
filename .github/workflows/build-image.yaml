@@ -1,0 +1,25 @@
+name: Build Docker Image 
+run-name: Docker build by ${{ github.actor }}. 🚀
+## on pr to main 
+
+on: 
+  pull_request:
+    # - main
+  jobs: 
+    name: Build Docker Image
+    build:
+      defaults:
+        run: 
+          working-directory: ./app
+    
+    steps: 
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+
+## checkout code
+## scan code (linting + other checks) 
+## automated testing? 
+## build image if previous step doesn't fail
+## security scan 
+## if sec scan passes pipeline succeeds
