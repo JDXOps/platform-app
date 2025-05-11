@@ -32,5 +32,5 @@ jobs:
         uses: docker/setup-docker-action@v4
       
       - name: Docker build 
-        run : DOCKER_BUILDKIT=1 docker build -t platform-app --file Dockerfile.multistage ./app 
+        run : DOCKER_BUILDKIT=1 docker build -t platform-app --file ./app/Dockerfile.multistage ./app 
 
