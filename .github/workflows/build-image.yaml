@@ -4,16 +4,15 @@ run-name: Docker build by ${{ github.actor }}. 🚀
 ## on pr to main 
 
 on: 
-  push:
+  pull_request:
+    branches:
+    - main 
 
 
 jobs: 
   build-docker-image: 
     name: Build Docker Image
     runs-on: ubuntu-latest 
-    defaults:
-      run:
-        working-directory: ./app
     steps: 
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -23,9 +22,11 @@ jobs:
 
       - name: Check code formatting
         run: ruff format --check . 
+        working-directory: ./app
 
       - name: Run code linting 
         run: ruff check . 
+        working-directory: ./app
 
       - name: Set up Docker
         uses: docker/setup-docker-action@v4
