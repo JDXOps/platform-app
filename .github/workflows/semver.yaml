@@ -39,9 +39,15 @@ jobs:
       - name: Build & Push Docker Image
         if: steps.semantic.outputs.new_release_published == 'true'
         run: |
-          DOCKER_BUILDKIT=1 docker build -t jdxops-demo-app:latest  --file app/Dockerfile.multistage ./app
+          DOCKER_BUILDKIT=1 docker build -t jdxops-demo-app:latest --file app/Dockerfile.multistage ./app
           docker tag jdxops-demo-app:latest jdial1996/jdxops-demo-app:latest
           docker push jdial1996/jdxops-demo-app:latest
 
-          docker tag jdxops-demo-app:latest jdial1996/jdxops-demo-app:$RELEASE_VERSION
-          docker push jdial1996/jdxops-demo-app:$RELEASE_VERSION
+          VERSION=${{ steps.semantic.outputs.release_version }}
+          if [ -n "$VERSION" ]; then
+            docker tag jdxops-demo-app:latest jdial1996/jdxops-demo-app:$VERSION
+            docker push jdial1996/jdxops-demo-app:$VERSION
+          else
+            echo "ERROR: VERSION is empty"
+            exit 1
+          fi
