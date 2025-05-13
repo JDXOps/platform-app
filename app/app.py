@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    message = "Welcome from JDXops!!"
+    message = "Welcome from JDXops!"
     return f"<h1>{message}</h1>"
 
 
