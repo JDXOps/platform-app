@@ -39,7 +39,7 @@ jobs:
       - name: Build & Push Docker Image
         if: steps.semantic.outputs.new_release_published == 'true'
         run: |
-          DOCKER_BUILDKIT=1 docker build -t jdxops-demo-app:latest .
+          DOCKER_BUILDKIT=1 docker build -t jdxops-demo-app:latest  --file app/Dockerfile.multistage ./app
           docker tag jdxops-demo-app:latest jdial1996/jdxops-demo-app:latest
           docker push jdial1996/jdxops-demo-app:latest
 
