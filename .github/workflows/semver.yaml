@@ -4,11 +4,16 @@ run-name: PR merged by ${{ github.actor }}.  (SemVer) 🚀
 on:
   push: 
    branches: 
-   - main 
+    - main 
+
+permissions:
+  contents: write
+  issues: write
+
 
 jobs: 
   generate-semver-tag: 
-    name: Build Docker Image
+    name: Semantic Release
     runs-on: ubuntu-latest 
     steps: 
       - name: Checkout Code
