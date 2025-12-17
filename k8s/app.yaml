@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: demo-app
+  name: demo-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demo-app
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: demo-app
+    spec:
+      containers:
+      - image: jdial1996/demo-app:v0.1.0
+        name: demo-app
+        resources:
+          requests:
+            cpu: "300m"
+            memory: "512Mi"

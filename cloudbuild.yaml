@@ -1,0 +1,39 @@
+# cloudbuild.yaml
+options:
+  logging: CLOUD_LOGGING_ONLY
+
+steps:
+  # Ruff format check
+  - name: "python:3.12-slim"
+    id: "ruff-format-check"
+    dir: "app"
+    entrypoint: "bash"
+    args:
+      - "-lc"
+      - |
+        python -m pip install --no-cache-dir ruff
+        ruff format --check .
+
+  # Ruff lint
+  - name: "python:3.12-slim"
+    id: "ruff-lint"
+    dir: "app"
+    entrypoint: "bash"
+    args:
+      - "-lc"
+      - |
+        python -m pip install --no-cache-dir ruff
+        ruff check .
+
+  # Docker build
+  - name: "gcr.io/cloud-builders/docker"
+    id: "docker-build"
+    args:
+      - "build"
+      - "-t"
+      - "platform-app"
+      - "--file"
+      - "app/Dockerfile.multistage"
+      - "app"
+
+images: []
